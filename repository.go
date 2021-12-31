@@ -3,7 +3,7 @@ package harbor
 import (
 	"encoding/json"
 	"fmt"
-	"harbor-client/model"
+	"github.com/dukhyungkim/harbor-client/model"
 )
 
 func (c *harborClient) ListRepositories(projectName string, params *model.ListRepositoriesParams) ([]*model.Repository, error) {

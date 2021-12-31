@@ -1,7 +1,7 @@
 package harbor
 
 import (
-	"harbor-client/model"
+	"github.com/dukhyungkim/harbor-client/model"
 )
 
 type HarborClient interface {

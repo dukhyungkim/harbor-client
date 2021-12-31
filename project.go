@@ -2,7 +2,7 @@ package harbor
 
 import (
 	"encoding/json"
-	"harbor-client/model"
+	"github.com/dukhyungkim/harbor-client/model"
 )
 
 func (c *harborClient) ListProjects(params *model.ListProjectParams) ([]*model.Project, error) {

@@ -4,7 +4,7 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
-	"harbor-client/model"
+	"github.com/dukhyungkim/harbor-client/model"
 	"io/ioutil"
 	"log"
 	"net/http"

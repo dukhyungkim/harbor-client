@@ -7,7 +7,7 @@ const (
 	urlArtifacts    = "/projects/%s/repositories/%s/artifacts"
 )
 
-type HarborConfig struct {
+type Config struct {
 	URL      string
 	Username string
 	Password string

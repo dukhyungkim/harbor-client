@@ -5,7 +5,7 @@ import (
 	"github.com/dukhyungkim/harbor-client/model"
 )
 
-func (c *harborClient) ListProjects(params *model.ListProjectParams) ([]*model.Project, error) {
+func (c *client) ListProjects(params *model.ListProjectParams) ([]*model.Project, error) {
 	if params == nil {
 		params = model.NewListProjectsParams()
 	}

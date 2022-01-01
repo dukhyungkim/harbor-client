@@ -6,7 +6,7 @@ import (
 	"github.com/dukhyungkim/harbor-client/model"
 )
 
-func (c *harborClient) ListRepositories(projectName string, params *model.ListRepositoriesParams) ([]*model.Repository, error) {
+func (c *client) ListRepositories(projectName string, params *model.ListRepositoriesParams) ([]*model.Repository, error) {
 	if params == nil {
 		params = model.NewListRepositoriesParams()
 	}

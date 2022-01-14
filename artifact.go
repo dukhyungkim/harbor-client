@@ -35,9 +35,9 @@ func (c *client) ListTags(projectName string, repositoryName string, reference s
 		return nil, err
 	}
 
-	var artifacts []*model.Tag
-	if err := json.Unmarshal(data, &artifacts); err != nil {
+	var tags []*model.Tag
+	if err := json.Unmarshal(data, &tags); err != nil {
 		return nil, err
 	}
-	return artifacts, nil
+	return tags, nil
 }

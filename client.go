@@ -2,9 +2,8 @@ package harbor
 
 import (
 	"encoding/base64"
-	"encoding/json"
+	"errors"
 	"fmt"
-	"github.com/dukhyungkim/harbor-client/model"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -66,11 +65,7 @@ func (c *client) doRequest(req *http.Request) ([]byte, error) {
 	}
 
 	if resp.StatusCode != 200 {
-		var errors []*model.Error
-		if err := json.Unmarshal(respData, &errors); err != nil {
-			return nil, err
-		}
-		return nil, nil
+		return nil, errors.New(string(respData))
 	}
 
 	return respData, nil

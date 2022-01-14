@@ -23,3 +23,21 @@ func (c *client) ListArtifacts(projectName string, repositoryName string, params
 	}
 	return artifacts, nil
 }
+
+func (c *client) ListTags(projectName string, repositoryName string, reference string, params *model.ListTagsParams) ([]*model.Tag, error) {
+	if params == nil {
+		params = model.NewListTagsParams()
+	}
+
+	url := fmt.Sprintf(urlTags, projectName, repositoryName, reference) + params.ToParamString()
+	data, err := c.getJSON(url, true)
+	if err != nil {
+		return nil, err
+	}
+
+	var artifacts []*model.Tag
+	if err := json.Unmarshal(data, &artifacts); err != nil {
+		return nil, err
+	}
+	return artifacts, nil
+}

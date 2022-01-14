@@ -5,6 +5,7 @@ const (
 	urlPing         = "/ping"
 	urlRepositories = "/projects/%s/repositories"
 	urlArtifacts    = "/projects/%s/repositories/%s/artifacts"
+	urlTags         = "/projects/%s/repositories/%s/artifacts/%s/tags"
 )
 
 type Config struct {

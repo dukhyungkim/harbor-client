@@ -6,7 +6,7 @@ import (
 	"github.com/dukhyungkim/harbor-client/model"
 )
 
-func (c *client) ListArtifacts(projectName string, repositoryName string, params *model.ListArtifactsParams) ([]*model.Artifact, error) {
+func (c *Client) ListArtifacts(projectName string, repositoryName string, params *model.ListArtifactsParams) ([]*model.Artifact, error) {
 	if params == nil {
 		params = model.NewListArtifactsParams()
 	}
@@ -24,7 +24,7 @@ func (c *client) ListArtifacts(projectName string, repositoryName string, params
 	return artifacts, nil
 }
 
-func (c *client) ListTags(projectName string, repositoryName string, reference string, params *model.ListTagsParams) ([]*model.Tag, error) {
+func (c *Client) ListTags(projectName string, repositoryName string, reference string, params *model.ListTagsParams) ([]*model.Tag, error) {
 	if params == nil {
 		params = model.NewListTagsParams()
 	}

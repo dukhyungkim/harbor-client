@@ -1,11 +1,14 @@
 package model
 
+import "time"
+
 type Repository struct {
-	CreationTime  string `json:"creation_time"`
-	UpdateTime    string `json:"update_time"`
-	ProjectID     int    `json:"project_id"`
-	ArtifactCount int    `json:"artifact_count"`
-	Name          string `json:"name"`
-	ID            int    `json:"id"`
-	PullCount     int    `json:"pull_count"`
+	UpdateTime    time.Time `json:"update_time"`
+	Description   string    `json:"description"`
+	PullCount     int       `json:"pull_count"`
+	CreationTime  time.Time `json:"creation_time"`
+	ArtifactCount int       `json:"artifact_count"`
+	ProjectID     int       `json:"project_id"`
+	ID            int       `json:"id"`
+	Name          string    `json:"name"`
 }

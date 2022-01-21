@@ -1,13 +1,72 @@
 package harbor
 
 import (
-	"github.com/dukhyungkim/harbor-client/model"
+	"encoding/base64"
+	"errors"
+	"fmt"
+	"io/ioutil"
+	"log"
+	"net/http"
 )
 
-type Client interface {
-	ListProjects(params *model.ListProjectParams) ([]*model.Project, error)
-	Ping() (string, error)
-	ListRepositories(projectName string, params *model.ListRepositoriesParams) ([]*model.Repository, error)
-	ListArtifacts(projectName string, repositoryName string, params *model.ListArtifactsParams) ([]*model.Artifact, error)
-	ListTags(projectName string, repositoryName string, reference string, params *model.ListTagsParams) ([]*model.Tag, error)
+type Client struct {
+	baseURL string
+	token   string
+}
+
+func NewClient(config *Config) *Client {
+	return &Client{
+		baseURL: config.URL + "/api/v2.0",
+		token:   base64.StdEncoding.EncodeToString([]byte(fmt.Sprintf("%s:%s", config.Username, config.Password))),
+	}
+}
+
+func (c *Client) getJSON(url string, useToken bool) ([]byte, error) {
+	req, err := http.NewRequest("GET", c.baseURL+url, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("accept", "application/json")
+	if useToken {
+		req.Header.Add("Authorization", fmt.Sprintf("Basic %s", c.token))
+	}
+	return c.doRequest(req)
+}
+
+func (c *Client) getText(url string, useToken bool) ([]byte, error) {
+	req, err := http.NewRequest("GET", c.baseURL+url, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("accept", "text/plain")
+	if useToken {
+		req.Header.Add("Authorization", fmt.Sprintf("Basic %s", c.token))
+	}
+	return c.doRequest(req)
+}
+
+func (c *Client) doRequest(req *http.Request) ([]byte, error) {
+	client := &http.Client{}
+	resp, err := client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer func() {
+		if err := resp.Body.Close(); err != nil {
+			log.Printf("failed to close response body cleanly; %v", err)
+		}
+	}()
+
+	respData, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return nil, err
+	}
+
+	if resp.StatusCode != 200 {
+		return nil, errors.New(string(respData))
+	}
+
+	return respData, nil
 }

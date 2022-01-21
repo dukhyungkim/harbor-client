@@ -1,14 +1,14 @@
 package harbor
 
 const (
-	urlPing           = "/ping"
-	urlProjects       = "/projects"
-	urlProjectInfo    = "/projects/%s"
-	urlRepositories   = "/projects/%s/repositories"
-	urlRepositoryInfo = "/projects/%s/repositories/%s"
-	urlArtifacts      = "/projects/%s/repositories/%s/artifacts"
-	urlArtifactInfo   = "/projects/%s/repositories/%s/artifacts/%s"
-	urlTags           = "/projects/%s/repositories/%s/artifacts/%s/tags"
+	urlPing             = "/ping"
+	urlListProjects     = "/projects"
+	urlGetProject       = "/projects/%s"
+	urlListRepositories = "/projects/%s/repositories"
+	urlGetRepository    = "/projects/%s/repositories/%s"
+	urlListArtifacts    = "/projects/%s/repositories/%s/artifacts"
+	urlGetArtifact      = "/projects/%s/repositories/%s/artifacts/%s"
+	urlListTags         = "/projects/%s/repositories/%s/artifacts/%s/tags"
 )
 
 type Config struct {

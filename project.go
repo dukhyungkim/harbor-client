@@ -11,7 +11,7 @@ func (c *Client) ListProjects(params *model.ListProjectParams) ([]*model.Project
 		params = model.NewListProjectsParams()
 	}
 
-	url := urlProjects + params.ToParamString()
+	url := urlListProjects + params.ToParamString()
 	data, err := c.getJSON(url, true)
 	if err != nil {
 		return nil, err
@@ -25,7 +25,7 @@ func (c *Client) ListProjects(params *model.ListProjectParams) ([]*model.Project
 }
 
 func (c *Client) GetProject(projectName string) (*model.Project, error) {
-	url := fmt.Sprintf(urlProjectInfo, projectName)
+	url := fmt.Sprintf(urlGetProject, projectName)
 	data, err := c.getJSON(url, true)
 	if err != nil {
 		return nil, err

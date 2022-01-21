@@ -11,7 +11,7 @@ func (c *Client) ListRepositories(projectName string, params *model.ListReposito
 		params = model.NewListRepositoriesParams()
 	}
 
-	url := fmt.Sprintf(urlRepositories, projectName) + params.ToParamString()
+	url := fmt.Sprintf(urlListRepositories, projectName) + params.ToParamString()
 	data, err := c.getJSON(url, true)
 	if err != nil {
 		return nil, err
@@ -22,4 +22,18 @@ func (c *Client) ListRepositories(projectName string, params *model.ListReposito
 		return nil, err
 	}
 	return repositories, nil
+}
+
+func (c *Client) GetRepository(projectName string, repositoryName string) (*model.Repository, error) {
+	url := fmt.Sprintf(urlGetRepository, projectName, repositoryName)
+	data, err := c.getJSON(url, true)
+	if err != nil {
+		return nil, err
+	}
+
+	var repository model.Repository
+	if err := json.Unmarshal(data, &repository); err != nil {
+		return nil, err
+	}
+	return &repository, nil
 }

@@ -1,14 +1,21 @@
 package model
 
 type WebhookEvent struct {
-	EventType string `json:"event_type"`
-	Events    []struct {
-		Project     string `json:"project"`
-		RepoName    string `json:"repo_name"`
-		Tag         string `json:"tag"`
-		FullName    string `json:"full_name"`
-		TriggerTime int64  `json:"trigger_time"`
-		ImageId     string `json:"image_id"`
-		ProjectType string `json:"project_type"`
-	} `json:"events"`
+	Type      string `json:"type"`
+	OccurAt   int    `json:"occur_at"`
+	Operator  string `json:"operator"`
+	EventData struct {
+		Resources []struct {
+			Digest      string `json:"digest"`
+			Tag         string `json:"tag"`
+			ResourceURL string `json:"resource_url"`
+		} `json:"resources"`
+		Repository struct {
+			DateCreated  int    `json:"date_created"`
+			Name         string `json:"name"`
+			Namespace    string `json:"namespace"`
+			RepoFullName string `json:"repo_full_name"`
+			RepoType     string `json:"repo_type"`
+		} `json:"repository"`
+	} `json:"event_data"`
 }
